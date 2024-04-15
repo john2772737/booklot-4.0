@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from '../components/footer'
 import Navbar from  '../components/navbar'
-import Manager from '../pages/main_pages/create_manager'
+import Manager from '../pages/main_pages/list_manager'
 function main() {
   return (
     <div>
