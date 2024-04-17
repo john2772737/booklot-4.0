@@ -1,36 +1,99 @@
+
 import React, { useEffect, useState } from "react";
 import ResponsiveTable from "../../components/tables";
 import axios from "axios";
-import Table from "react-bootstrap/esm/Table";
-import './/..//..//components/table.css'
-function List_manager() {
-  // State to store the fetched data
-  const [data, setData] = useState([]);
+import ModalCom from "../../components/modal";
+import Button from 'react-bootstrap/Button';
 
-  // Function to fetch data
+function List_manager() {
+  const [data, setData] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+
+  const handleModalClose = () => setModalShow(false);
+  const handleModalShow = () => setModalShow(true);
+
   useEffect(() => {
-    axios.get('http://localhost:4000/admin/listAdmin')
-      .then(res => setData(res.data))
-      .catch(err => console.log(err));
+    axios
+      .get("http://localhost:4000/admin/listAdmin")
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
-  // Extracting data properties for each element in the data array
-  const setlist = data.map(item => [
+  const setlist = data.map((item) => [
     item.name,
     item.username,
     item.position,
     item.email,
     item.birthday,
     item.phoneNumber,
-    item.photo
+    item.photo,
   ]);
-  
-  const tableHeading = ['Name', 'Username', 'Position', 'Email', 'Birthday', 'Phone Number', 'Photo', ];
+
+  const tableHeading = [
+    "Name",
+    "Username",
+    "Position",
+    "Email",
+    "Birthday",
+    "Phone Number",
+    "Photo",
+  ];
+
+ 
+const modalForm = [
+  {
+    controlId: "formName",
+    type: "string",
+    placeholder: "Enter name",
+  },
+  {
+    controlId: "formUsername",
+    type: "string",
+    placeholder: "Enter username",
+  },
+  {
+    controlId: "formPosition",
+    type: "string",
+    placeholder: "Enter position",
+  },
+  {
+    controlId: "formEmail",
+    type: "email",
+    placeholder: "Enter email",
+  },
+  {
+    controlId: "formBirthday",
+    type: "date",
+    placeholder: "Select birthday",
+  },
+  {
+    controlId: "formPhoneNumber",
+    type: "tel",
+    placeholder: "Enter phone number",
+  },
+  {
+    controlId: "formPhoto",
+    type: "file",
+    placeholder: "Upload photo",
+  },
+];
+
+const footerValue=[
+    <Button > Submit</Button>,
+    <Button > Cancel</Button>
+]
+
 
   return (
-          <Table className='table w-50'>
-          <ResponsiveTable heading={tableHeading} dataa={setlist} action={true} />
-          </Table>
+    
+
+    <div>
+      <button onClick={handleModalShow}>ADD</button>
+      
+      <ModalCom Title="Create Manager" body={modalForm}  show={modalShow} onHide={handleModalClose} footer={footerValue} />
+     
+      <ResponsiveTable heading={tableHeading} dataa={setlist} action={true} />
+    </div>
   );
 }
 

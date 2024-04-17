@@ -1,16 +1,23 @@
-import React from 'react'
-import Footer from '../components/footer'
-import Navbar from  '../components/navbar'
-import Manager from '../pages/main_pages/list_manager'
-function main() {
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom'; 
+import Footer from '../components/footer';
+import Navbar from '../components/navbar';
+
+function Main() {
   return (
     <div>
-       <Navbar/>
-        <Manager/>
-      <Footer/>
+      <Navbar />
+      {/* Use Links instead of Routes */}
+      <Link to="/">Dashboard</Link>
+      <Link to="listseller">List Seller</Link>
+      <Link to="manager">List Manager</Link>
+      {/* Render components based on route in App.js or equivalent */}
+      <Outlet/>  
+      <Footer />
 
+    
     </div>
-  )
+  );
 }
 
-export default main
+export default Main;
