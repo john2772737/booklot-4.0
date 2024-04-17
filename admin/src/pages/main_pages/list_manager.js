@@ -7,19 +7,28 @@ function List_manager() {
   const [data, setData] = useState([]);
 
   // Function to fetch data
-  useEffect(()=>{
+  useEffect(() => {
     axios.get('http://localhost:4000/admin/listAdmin')
-    .then(res=> setData(res.data))
-    .catch(er => console.log(er))
-  },[])
+      .then(res => setData(res.data))
+      .catch(err => console.log(err));
+  }, []);
 
-  console.log(data)
-
-  const tableHeading = ['Name', 'Username', 'Position', 'Email', 'Birthday', 'Phone Number', 'Photo'];
+  // Extracting data properties for each element in the data array
+  const setlist = data.map(item => [
+    item.name,
+    item.username,
+    item.position,
+    item.email,
+    item.birthday,
+    item.phoneNumber,
+    item.photo
+  ]);
+  
+  const tableHeading = ['Name', 'Username', 'Position', 'Email', 'Birthday', 'Phone Number', 'Photo', 'Actions'];
 
   return (
     <div>
-      <ResponsiveTable heading={tableHeading} dataa={data} />
+      <ResponsiveTable heading={tableHeading} dataa={setlist} />
     </div>
   );
 }

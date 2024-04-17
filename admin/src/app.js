@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Main from "./pages/main";
 import PageNotFound from "./pages/pagenotfound";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function app() {
   return (
     <div>

@@ -1,34 +1,43 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
 
-function ResponsiveTable({ heading, dataa }) {
+function ResponsiveTable({ heading, dataa, action }) {
+  const handleAction = (itemId) => {
+    // Perform the action here, based on the itemId or any other data
+    console.log("Action clicked for item with ID:", itemId);
+  };
+
   return (
-    <table className="table table-responsive">
-      <thead>
-        <tr>
-          <th>#</th>
-          {heading.map(
-            (
-              item,
-              index // Error likely originates here
-            ) => (
+    <div className="table-responsive">
+      <Table bordered striped hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            {heading.map((item, index) => (
               <th key={index}>{item}</th>
-            )
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {dataa.map((admin , index) => (
+            ))}
+            {action && <th>Action</th>} {/* Add an action column if action is provided */}
+          </tr>
+        </thead>
+        <tbody>
+          {dataa.map((admin, index) => (
             <tr key={index}>
-    <td>{index + 1}</td>
-        {Object.keys(admin).map((key, idx) => (
-        <td key={idx}>
-            {typeof admin[key] === 'object' ? JSON.stringify(admin[key]) : admin[key]}
-        </td>
-        ))}
-  </tr>
-        ))}
-      </tbody>
-    </table>
+              <td>{index + 1}</td>
+              {admin.map((item, itemIndex) => (
+                <td key={itemIndex}>
+                  {typeof item === "object" ? JSON.stringify(item) : item}
+                </td>
+              ))}
+              {action && ( // Render action button if action is provided
+                <td>
+                  <button onClick={() => handleAction(admin.id)}>Action</button>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 }
 
