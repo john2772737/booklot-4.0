@@ -28,7 +28,7 @@ function List_manager() {
   const tableHeading = ['Name', 'Username', 'Position', 'Email', 'Birthday', 'Phone Number', 'Photo', ];
 
   return (
-          <Table className='table'>
+          <Table className='table w-50'>
           <ResponsiveTable heading={tableHeading} dataa={setlist} action={true} />
           </Table>
   );
