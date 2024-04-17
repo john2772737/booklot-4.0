@@ -8,8 +8,8 @@ function ResponsiveTable({ heading, dataa, action }) {
   };
 
   return (
-    <div className="table-responsive">
-      <Table bordered striped hover>
+  
+      <Table >
         <thead>
           <tr>
             <th>#</th>
@@ -30,14 +30,15 @@ function ResponsiveTable({ heading, dataa, action }) {
               ))}
               {action && ( // Render action button if action is provided
                 <td>
-                  <button onClick={() => handleAction(admin.id)}>Action</button>
+                  <button onClick={() => handleAction(admin.id)}>check</button>
+                  <button>cross</button>
                 </td>
               )}
             </tr>
           ))}
         </tbody>
       </Table>
-    </div>
+
   );
 }
 

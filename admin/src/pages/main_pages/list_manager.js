@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ResponsiveTable from "../../components/tables";
 import axios from "axios";
-
+import Table from "react-bootstrap/esm/Table";
+import './/..//..//components/table.css'
 function List_manager() {
   // State to store the fetched data
   const [data, setData] = useState([]);
@@ -24,12 +25,12 @@ function List_manager() {
     item.photo
   ]);
   
-  const tableHeading = ['Name', 'Username', 'Position', 'Email', 'Birthday', 'Phone Number', 'Photo', 'Actions'];
+  const tableHeading = ['Name', 'Username', 'Position', 'Email', 'Birthday', 'Phone Number', 'Photo', ];
 
   return (
-    <div>
-      <ResponsiveTable heading={tableHeading} dataa={setlist} />
-    </div>
+          <Table className='table'>
+          <ResponsiveTable heading={tableHeading} dataa={setlist} action={true} />
+          </Table>
   );
 }
 
