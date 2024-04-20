@@ -3,9 +3,10 @@ import { Link, Outlet } from 'react-router-dom';
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 
-function Main() {
+function Main({Logout}) {
   return (
     <div>
+      <button onClick={Logout}>Logout</button>
       <Navbar />
       {/* Use Links instead of Routes */}
       <Link to="/">Dashboard</Link>
