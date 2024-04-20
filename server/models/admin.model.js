@@ -19,7 +19,12 @@ const userSchema = new mongoose.Schema({
   },
   birthday: Date,
   phoneNumber: String,
+
   photo: {
+    data: Buffer, // Store binary data
+    contentType: String // Mime type of the image
+  },
+  idphoto: {
     data: Buffer, // Store binary data
     contentType: String // Mime type of the image
   }

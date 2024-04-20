@@ -27,6 +27,9 @@ function List_manager() {
     item.birthday,
     item.phoneNumber,
     item.photo,
+    item.id   
+
+    
   ]);
 
   const tableHeading = [
@@ -37,6 +40,7 @@ function List_manager() {
     "Birthday",
     "Phone Number",
     "Photo",
+    "ID PHOTO"
   ];
 
  
@@ -76,6 +80,11 @@ const modalForm = [
     type: "file",
     placeholder: "Upload photo",
   },
+  {
+    controlId: "formidPhoto",
+    type: "file",
+    placeholder: "Upload id photo",
+  }
 ];
 
 const footerValue=[

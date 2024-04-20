@@ -10,8 +10,8 @@ function Main({Logout}) {
       <Navbar />
       {/* Use Links instead of Routes */}
       <Link to="/">Dashboard</Link>
-      <Link to="listseller">List Seller</Link>
-      <Link to="manager">List Manager</Link>
+      <Link to="/main/listseller">List Seller</Link>
+      <Link to="/main/manager">List Manager</Link>
       {/* Render components based on route in App.js or equivalent */}
       <Outlet/>  
       <Footer />
