@@ -1,7 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGooglePlusG, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
-
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../utils/firebase';
 function SignInForm() {
   const [state, setState] = React.useState({
     email: "",
@@ -31,16 +32,39 @@ function SignInForm() {
   const handleSocialClick = (event, provider) => {
     // Handle social click
   };
+  const signInWithGooogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+
+      const result = await signInWithPopup(auth, provider);
+
+      console.log('LOGGED USER', result.user);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const signInWithFacebook = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+
+      const result = await signInWithPopup(auth, provider);
+
+      console.log('LOGGED USER', result.user);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="form-container sign-in-container">
       <form onSubmit={handleOnSubmit}>
         <h1>Sign in</h1>
         <div className="social-container">
-          <button onClick={(event) => handleSocialClick(event, 'facebook')} className="social">
+          <button onClick={signInWithFacebook} className="social">
             <FontAwesomeIcon icon={faFacebookF} />
           </button>
-          <button onClick={(event) => handleSocialClick(event, 'google')} className="social">
+          <button onClick={signInWithGooogle} className="social">
             <FontAwesomeIcon icon={faGooglePlusG} />
           </button>
           <button onClick={(event) => handleSocialClick(event, 'linkedin')} className="social">
