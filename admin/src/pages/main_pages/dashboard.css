@@ -1,0 +1,42 @@
+/* dashboard.css */
+.outer-container {
+    background-color: #f3f4e7;
+    height: 600px;
+    width: 80%; /* Adjust as needed */
+    margin-left: 230px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+  }
+
+  .table-container {
+    background-color: #f3f4e7;
+    height: 600px;
+    width: 1045px;
+    display: flex;
+    justify-content: center; /* Center the table horizontally */
+    align-items: center; /* Center the table vertically */
+    border-radius: 20px;
+  }
+  
+  .inner-container {
+    width: 45%; /* Adjust as needed */
+  }
+  
+  .box-container {
+    background-color: #545454;
+    border: 1px solid #fff;
+    padding: 20px;
+    border-radius: 10px; /* Add corner radius */
+    height: 250px;
+    width: 400px;
+  }
+  
+  .overview h1 {
+    margin-left: 230px;
+  }

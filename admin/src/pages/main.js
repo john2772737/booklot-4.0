@@ -1,22 +1,22 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom'; 
+import { Outlet } from 'react-router-dom'; 
 import Footer from '../components/footer';
-import Navbar from '../components/navbar';
+import CustomNavbar from '../components/navbar';
+import Sidebar from '../components/sidebar';
 
-function Main({Logout}) {
+function Main() {
+  const links = [
+    { to: '/main/dashboard', text: 'Dashboard' },
+    { to: '/main/listseller', text: 'List Seller' },
+    { to: '/main/manager', text: 'List Manager' }
+  ];
+
   return (
     <div>
-      <button onClick={Logout}>Logout</button>
-      <Navbar />
-      {/* Use Links instead of Routes */}
-      <Link to="/">Dashboard</Link>
-      <Link to="/main/listseller">List Seller</Link>
-      <Link to="/main/manager">List Manager</Link>
-      {/* Render components based on route in App.js or equivalent */}
+      <CustomNavbar brand="Booklot" search="Search" user="Admin/Manager" settings="Settings" links={links} />
+      <Sidebar links={links} /> {/* Render the Sidebar component */}
       <Outlet/>  
       <Footer />
-
-    
     </div>
   );
 }
