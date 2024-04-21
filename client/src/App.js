@@ -13,16 +13,18 @@ import Inventory from "./pages/selller/Inventory";
 import Live from "./pages/selller/Live";
 import Order from "./pages/selller/order";
 import Voucher from "./pages/selller/voucher";
-
-
+import Home from "./pages/user/home";
+import PageNotFound from "./pages/pagenotfound";
+import SellerLogin from "./pages/sellerLogin"
 function App() {
   return (
     <Routes>
-      <Route path="/userLogin " element={<UserLogin />}></Route>
-      <Route path="/sellerLogin " element={<sellerLogin />}></Route>
-      <Route path="*" element={<PageNotFound />}></Route>
+      <Route path="/" element={<UserLogin />} />
+      <Route path="/userLogin" element={<UserLogin />} /> {/* Corrected route path */}
+      <Route path="/sellerLogin" element={<SellerLogin />} /> {/* Added sellerLogin route */}
+      <Route path="*" element={<PageNotFound />} /> {/* Catch-all route for page not found */}
 
-      <Route path="user" element={<User />}>
+      <Route path="/user" element={<User />}>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="cart" element={<Cart />} />
@@ -33,7 +35,7 @@ function App() {
         </Route>
       </Route>
 
-      <Route path="seller" element={<Seller />}>
+      <Route path="/seller" element={<Seller />}>
         <Route index element={<Dashboard />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="editprofile" element={<Editprofile_seller />} />
