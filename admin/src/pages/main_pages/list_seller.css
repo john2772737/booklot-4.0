@@ -1,0 +1,12 @@
+/* list_seller.css */
+.container-box {
+    width: 80%; /* Adjust as needed */
+    height: 600px;
+    padding: 20px;
+    background-color: #f3f4e7;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Add corner radius */
+    margin: 20px auto; /* Center the container */
+    margin-left: 230px;
+  }
+  

@@ -1,13 +1,20 @@
 import React from 'react';
+import './privateroute.css'; // Import CSS for styling
 
-function PrivateRoute({children}) { // changed component to element
+function PrivateRoute({ children }) {
   const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
-  if (!isLoggedIn){
-    return <div>
-        <h1>please log in</h1>
-    </div>
+
+  if (!isLoggedIn) {
+    return (
+      <div className="login-container">
+        <div className="login-box"> {/* Container box */}
+          <h1 className="login-text">Please Log In</h1>
+        </div>
+      </div>
+    );
   }
-  return children
+
+  return children;
 }
 
 export default PrivateRoute;

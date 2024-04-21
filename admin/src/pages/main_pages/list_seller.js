@@ -1,11 +1,33 @@
-import React from 'react'
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
+import './list_seller.css'; // Import your CSS file
 
-function list_seller() {
+function ListSeller() {
   return (
-    <div>
-      <h1>list seller</h1>
-    </div>
-  )
+    <Container className="container-box"> {/* Container box */}
+      <h1>List Seller</h1>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>john@example.com</td>
+            <td>123-456-7890</td>
+          </tr>
+          {/* Add more rows as needed */}
+        </tbody>
+      </Table>
+    </Container>
+  );
 }
 
-export default list_seller
+export default ListSeller;
