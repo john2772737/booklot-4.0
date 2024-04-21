@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import UserLogin from "./pages/userLogin";
-import User from "./pages/user";
+import Users from "./pages/user";
 import Seller from "./pages/seller";
 import Cart from "./pages/user/cart";
 import Profile from "./pages/user/profile";
@@ -24,7 +24,7 @@ function App() {
       <Route path="/sellerLogin" element={<SellerLogin />} /> {/* Added sellerLogin route */}
       <Route path="*" element={<PageNotFound />} /> {/* Catch-all route for page not found */}
 
-      <Route path="/user" element={<User />}>
+      <Route path="user" element={<Users />}>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="cart" element={<Cart />} />
@@ -35,7 +35,7 @@ function App() {
         </Route>
       </Route>
 
-      <Route path="/seller" element={<Seller />}>
+      <Route path="seller" element={<Seller />}>
         <Route index element={<Dashboard />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="editprofile" element={<Editprofile_seller />} />
