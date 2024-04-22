@@ -1,4 +1,13 @@
-.sidebar-wrapper {
-    height: 100vh; /* Sets the height of the sidebar wrapper to 100% of the viewport height */
-  }
-  
+/* Sidebar.css */
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f0f0f0; /* Sidebar background color */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+
+/* Styles for Menu and MenuItem can be added here if needed */
