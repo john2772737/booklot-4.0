@@ -14,7 +14,7 @@ function Main({ Logouts }) {
         <Sidebar />
         <div className="content">
           <Outlet /> {/* Place Outlet here */}
-          <Footer />
+       
         </div>
       </div>
     </div>
