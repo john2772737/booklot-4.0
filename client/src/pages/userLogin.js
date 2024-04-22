@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SignInForm from "./../components/signin";
 import SignUpForm from "./../components/signup";
-import '../css/userLogin.css'
+
 function UserLogin() {
   const [type, setType] = useState("signIn");
   const handleOnClick = text => {
