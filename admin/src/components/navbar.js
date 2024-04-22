@@ -1,56 +1,98 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button'; // Import Button component
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
-import './navbar_style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
-function CustomNavbar({ brand, search, user, settings, links, Logout }) {
-  const [showBurgerNav, setShowBurgerNav] = useState(true); // Set to true by default
+const drawerWidth = 240;
+const navItems = ['Home', 'About', 'Contact'];
+
+export default function DrawerAppBar() {
+
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        MUI
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+
 
   return (
-    <div className="sticky-top"> 
-      {/* Main Navbar */}
-      <Navbar expand="lg" className="custom-navbar">
-        <Container fluid>
-          <Navbar.Brand href="#">{brand}</Navbar.Brand>
-          {/* Burger Navbar */}
-          <div className={`burger-navbar${showBurgerNav ? ' open' : ''}`}>
-            <Container fluid>
-              <Nav className="flex-column">
-                {/* Mapping over the links array */}
-                {links &&
-                  links.map((link, index) => (
-                    <Link key={index} to={link.to} className="nav-link">
-                      {link.text}
-                    </Link>
-                  ))}
-              </Nav>
-            </Container>
-          </div>
-          <Navbar.Collapse id="navbarScroll">
-            <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll />
-            <Form className="d-flex align-items-center">
-              <Form.Control type="search" placeholder="Search" className="search-bar me-2" aria-label="Search" />
-              <Button variant="outline-success" className="search-button">
-                {search}
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar component="nav" position="static">
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            MUI
+          </Typography>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {navItems.map((item) => (
+              <Button key={item} sx={{ color: '#fff' }}>
+                {item}
               </Button>
-            </Form>
-            <div className="user-info">
-              {user}
-              <Button variant="outline-primary" className="settings-button">
-                {settings}
-              </Button>
-              <Button onClick={Logout}>Logout</Button>
-            </div>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div> 
+            ))}
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <nav>
+        <Drawer
+         
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </nav>
+      
+    </Box>
   );
 }
-
-export default CustomNavbar;

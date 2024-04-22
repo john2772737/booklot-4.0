@@ -30,6 +30,7 @@ function Login() {
       setIsLoggedIn(true);
       // Store session information in sessionStorage
       sessionStorage.setItem('isLoggedIn', 'true');
+      navigate('/main' );
     } else {
       toast.error('Invalid username or password');
     }
@@ -46,10 +47,7 @@ function Login() {
   return (
     <div>
       <Toaster />
-      <h2>Login</h2>
-      {loggedIn ? (
-           <Main Logout={handleLogout}/>                                                                               
-      ) : (
+    
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username:</label>
@@ -61,7 +59,7 @@ function Login() {
           </div>
           <button type="submit">Login</button>
         </form>
-      )}
+        {loggedIn && <Main Logouts={handleLogout} />}
     </div>
   );
 }

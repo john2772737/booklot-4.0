@@ -1,13 +1,11 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/Container";
-import "./table.css";
 
-function ResponsiveTable({ heading, dataa, action }) {
-  const handleAction = (itemId) => {
-    // Perform the action here, based on the itemId or any other data
-    console.log("Action clicked for item with ID:", itemId);
-  };
+
+
+function ResponsiveTable({ heading, dataa, action ,onActionClick}) {
+
+
 
   return (
     <Table responsive>
@@ -28,20 +26,17 @@ function ResponsiveTable({ heading, dataa, action }) {
         </tr>
       </thead>
       <tbody>
-        {dataa.map((admin, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            {admin.map((item, itemIndex) => (
-              <td key={itemIndex}>
-                {typeof item === "object" ? JSON.stringify(item) : item}
-              </td>
+        {dataa.map((rowData, rowIndex) => (
+        
+          <tr key={rowIndex}>
+          
+          <td>{rowIndex + 1}</td>
+            {rowData.map((data, colIndex) => (
+              <td key={colIndex}>{data}</td>
             ))}
             {action && (
               <td>
-                <div style={{ display: "flex" }}>
-                  <button onClick={() => handleAction(admin.id)}>check</button>
-                  <button>cross</button>
-                </div>
+              <button onClick={() => onActionClick(rowData[0])}>DELETE</button>
               </td>
             )}
           </tr>

@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom'; 
-import './navbar_style.css';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+import {  Link } from 'react-router-dom'; 
 
-function Sidebar({ links }) {
-  const [showBurgerNav, setShowBurgerNav] = useState(false);
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
-  const toggleBurgerNav = () => {
-    setShowBurgerNav(!showBurgerNav);
-  };
-
+function App() {
+ 
   return (
-    <div className={`burger-navbar${showBurgerNav ? ' open' : ''}`}>
-      <Container fluid>
-        <Nav className="flex-column">
-          {links &&
-            links.map((link, index) => (
-              <Link key={index} to={link.to} className="nav-link">{link.text}</Link>
-            ))}
-        </Nav>
-      </Container>
+    <div id="app" style={{ height: "100vh", display: "flex" }}>
+      <Sidebar style={{ height: "100vh" }}>
+        <Menu>
+
+          <MenuItem icon={<HomeOutlinedIcon />}>
+          <Link to="/main">Home</Link></MenuItem>
+          <MenuItem icon={<PeopleOutlinedIcon />}> <Link to="/main/listseller">Seller</Link></MenuItem>
+          <MenuItem icon={<ContactsOutlinedIcon />}> <Link to="/main/manager">Manager</Link></MenuItem>
+         
+        </Menu>
+      </Sidebar>
     </div>
   );
 }
 
-export default Sidebar;
+export default App;

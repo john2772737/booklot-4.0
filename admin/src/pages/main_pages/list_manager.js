@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import ResponsiveTable from "../../components/tables";
 import axios from "axios";
 import ModalCom from "../../components/modal";
-import Button from "react-bootstrap/Button";
+import '../../components/table.css'
+
 import { Toaster, toast } from "react-hot-toast";
 import Container from "react-bootstrap/Container"; 
 function List_manager() {
@@ -11,53 +12,112 @@ function List_manager() {
 
   const handleModalClose = () => setModalShow(false);
   const handleModalShow = () => setModalShow(true);
+  console.log(data)
+  
+  useEffect(() => {
+    fetchData();
+  }, []); // Fetch data only once when component mounts
+
+  const fetchData = async (event) => {
+    try {
+      const response = await axios.get("http://localhost:4000/admin/listAdmin");
+      setData(response.data);
+  
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
 
   const [formData, setFormData] = useState({
     name: "",
     username: "",
+    password:"",
     position: "",
     email: "",
     birthday: "",
     phoneNumber: "",
-    photo: null,
+   
   });
   const [required, setRequired] = useState({
     name: false,
     username: false,
+
     position: false,
     email: false,
     birthday: false,
     phoneNumber: false,
-    photo: false,
+ 
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    setRequired(false);
 
-    setFormData((prevFormData) => {
-      const updatedFormData = {
-        ...prevFormData,
-        [name]: value,
-      };
-      console.log("Updated FormData:", updatedFormData);
-      return updatedFormData;
-    });
-    // Call the errorHandling function after updating formData
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(formData);
+  
 
+   
+    let hasEmptyField = false;
+   
+     // Iterate over each field in the form data
+    modalForm.forEach(field => {
+        if (!formData[field.name]) {
+            // If the field is empty, update the required state for that field
+            setRequired(prevState => ({ ...prevState, [field.name]: true }));
+            hasEmptyField = true;
+        } else {
+            // If the field is not empty, clear the required state for that field
+            setRequired(prevState => ({ ...prevState, [field.name]: false }));
+        }
+    });
+    
+  
+    if (hasEmptyField) {
+      // Show error message for empty fields
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+  
     try {
       await axios.post("http://localhost:4000/admin/createadmin", formData);
       console.log("Form data successfully submitted!");
       toast.success("Submitted successfully!");
+      fetchData();
       handleModalClose();
+      
     } catch (error) {
+    
       if (error.response) {
-        // Request was made and server responded with a status code that falls out of the range of 2xx
-        console.error("Server responded with an error:", error.response.data);
-        toast.error(`Server responded with an error: ${error.response.data}`);
+        // Request was made and server responded with a status code
+        const statusCode = error.response.status;
+        if (statusCode === 409) {
+          // If the error is due to a conflict (status 409)
+          if (error.response.data.message === "Email already exists") {
+            // If the error message indicates duplicate email
+            toast.error("Email already exists. Please use a different email.");
+          } else if (error.response.data.message === "Username already exists") {
+            // If the error message indicates duplicate username
+            toast.error("Username already exists. Please choose a different username.");
+          } else {
+            // If the error is not due to duplicate email or username, display generic error message
+            console.error("Server responded with an error:", error.response.data);
+            toast.error(`Server responded with an error: ${error.response.data.message}`);
+          }
+        } else {
+          // If the error is not a conflict (status 409), display generic error message
+          console.error("Server responded with an error:", error.response.data);
+          toast.error(`Server responded with an error: ${error.response.data.message}`);
+        }
       } else if (error.request) {
         // Request was made but no response was received
         console.error("No response received from server:", error.request);
@@ -74,25 +134,31 @@ function List_manager() {
       }
     }
   };
-
+  
   const setlist = data.map((item) => [
+    item._id,
     item.name,
     item.username,
-    item.position,
+    item.password,
     item.email,
-    item.birthday,
+    item.birthday=item.birthday.replace("T00:00:00.000Z", " "),
     item.phoneNumber,
-    item.photo,
+   
+
+
   ]);
 
+
+
   const tableHeading = [
+    "id",
     "Name",
     "Username",
-    "Position",
+    "Password",
     "Email",
     "Birthday",
     "Phone Number",
-    "Photo",
+  
   ];
 
   const [invalid, setInvalid] = useState({
@@ -102,15 +168,17 @@ function List_manager() {
     email: false,
     birthday: false,
     phoneNumber: false,
-    photo: false,
+   
   });
 
   const errorHandling = (fieldName) => {
     const namePattern = /^[a-zA-Z\s]+$/; // Regular expression to allow only letters and spaces
-    const usernamePattern = /^[a-zA-Z0-9_]+$/; // Regular expression for username (letters, numbers, and underscore)
+    const usernamePattern = /^[a-zA-Z0-9_]{5,}$/;
+    // Regular expression for username (letters, numbers, and underscore)
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for email validation
     const phonePattern = /^\d{10}$/; // Regular expression for 10-digit phone number
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Regular expression for date in yyyy-mm-dd format
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // Regular expression for password (minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number)// Regular expression for date in yyyy-mm-dd format
 
     switch (fieldName) {
       case "name":
@@ -127,6 +195,13 @@ function List_manager() {
           setInvalid((prevState) => ({ ...prevState, username: false }));
         }
         break;
+        case "password":
+          if (!passwordPattern.test(formData.password)) {
+              setInvalid((prevState) => ({ ...prevState, password: true }));
+          } else {
+              setInvalid((prevState) => ({ ...prevState, password: false }));
+          }
+          break;
       case "email":
         if (!emailPattern.test(formData.email)) {
           setInvalid((prevState) => ({ ...prevState, email: true })); // Update only the 'email' property of the invalid state
@@ -148,12 +223,14 @@ function List_manager() {
           setInvalid((prevState) => ({ ...prevState, birthday: false }));
         }
         break;
+       
+      
       // Add cases for other fields if needed
       default:
         break;
     }
   };
-
+  
   const modalForm = [
     {
       name: "name",
@@ -162,11 +239,9 @@ function List_manager() {
       placeholder: "Enter name",
       onChange: handleInputChange,
       onBlur: () => errorHandling("name"),
-      errortext: "Invalid username",
-      error: invalid.name, // Use specific invalid state for the "name" field
+      errortext: required.name ? "Name is required" : "Name must contain letters only",
+      error: invalid.name || required.name,
     },
-    // Apply the same logic to other form controls
-
     {
       name: "username",
       controlId: "formUsername",
@@ -174,18 +249,18 @@ function List_manager() {
       placeholder: "Enter username",
       onChange: handleInputChange,
       onBlur: () => errorHandling("username"),
-      errortext: "Invalid username",
-      error: invalid.username, // Use specific invalid state for the "name" field
+      errortext: required.username ? "Username is required" : "Username must be 5 characters long",
+      error: invalid.username || required.username,
     },
     {
-      name: "position",
-      controlId: "formPosition",
-      type: "text",
-      placeholder: "Enter position",
+      name: "password",
+      controlId: "formPassword",
+      type: "password",
+      placeholder: "Enter password",
       onChange: handleInputChange,
-      onBlur: () => errorHandling("position"),
-      errortext: "Invalid position",
-      error: invalid.position, // Use specific invalid state for the "name" field
+      onBlur: () => errorHandling("password"),
+      errortext: invalid.password ? "Invalid password" : "",
+      error: invalid.password,
     },
     {
       name: "email",
@@ -194,8 +269,8 @@ function List_manager() {
       placeholder: "Enter email",
       onChange: handleInputChange,
       onBlur: () => errorHandling("email"),
-      errortext: "Invalid email",
-      error: invalid.email, // Use specific invalid state for the "name" field
+      errortext: invalid.email ? "Invalid email" : "",
+      error: invalid.email,
     },
     {
       name: "birthday",
@@ -204,8 +279,8 @@ function List_manager() {
       placeholder: "Select birthday",
       onChange: handleInputChange,
       onBlur: () => errorHandling("birthday"),
-      errortext: "Invalid birthday",
-      error: invalid.birthday, // Use specific invalid state for the "name" field
+      errortext: invalid.birthday ? "Invalid birthday" : "",
+      error: invalid.birthday,
     },
     {
       name: "phoneNumber",
@@ -214,29 +289,26 @@ function List_manager() {
       placeholder: "Enter phone number",
       onChange: handleInputChange,
       onBlur: () => errorHandling("phoneNumber"),
-      errortext: "Invalid phone number",
-      error: invalid.phoneNumber, // Use specific invalid state for the "name" field
+      errortext: invalid.phoneNumber ? "Invalid phone number" : "",
+      error: invalid.phoneNumber,
     },
-    {
-      name: "photo",
-      controlId: "formPhoto",
-      type: "file",
-      placeholder: "Upload photo",
-      onChange: handleInputChange,
-      onBlur: () => errorHandling("photo"),
-      errortext: "Invalid photo",
-      error: invalid.photo, // Use specific invalid state for the "name" field
-    },
+    
   ];
-
-  const footerValue = [
-    <Button key="submitBtn" onClick={handleSubmit}>
-      Submit
-    </Button>,
-    <Button key="cancelBtn" onClick={handleModalClose}>
-      Cancel
-    </Button>,
-  ];
+  
+  const handleActionClick = async (_id) => {
+    console.log("Admin ID clicked:", _id);
+    
+    try {
+       await axios.delete(`http://localhost:4000/admin/deleteAdmin/${_id}`);
+      toast.success("Deleted Successfully")
+      fetchData();
+      // Optionally, you can update the UI or trigger a refetch of data if needed
+    } catch (error) {
+      console.error("Error deleting admin:", error);
+      // Handle errors, show error message, or perform any other actions
+    }
+  };
+  
 
   return (
     <Container fluid className="table-container">
@@ -250,9 +322,12 @@ function List_manager() {
           body={modalForm}
           show={modalShow}
           onHide={handleModalClose}
-          footer={footerValue}
+          onSubmit={handleSubmit}
+          onCancel={handleModalClose}
+          
+         
         />
-        <ResponsiveTable heading={tableHeading} dataa={setlist} action={true} />
+        <ResponsiveTable heading={tableHeading} dataa={setlist} action={true}  onActionClick={handleActionClick} />
       </div>
     </Container>
   );

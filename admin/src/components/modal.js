@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-
-function Modal_com({ Title, body, show, onHide, footer }) {
+function Modal_com({ Title, body, show, onHide, onSubmit, onCancel }) {
   const [focusedField, setFocusedField] = useState(null);
 
   const handleFocus = (name) => {
@@ -36,14 +36,11 @@ function Modal_com({ Title, body, show, onHide, footer }) {
                   onFocus={() => handleFocus(group.name)}
                   name={group.name}
                   isInvalid={group.error && group.name !== focusedField}
-                  style={group.required ? { borderColor: "red" } : {}}
                 />
-  
 
                 {group.errortext &&
                   group.error &&
-                  group.name !== focusedField &&
-                  !group.required && (
+                  group.name !== focusedField && (
                     <Form.Control.Feedback type="invalid">
                       {group.errortext}
                     </Form.Control.Feedback>
@@ -51,7 +48,14 @@ function Modal_com({ Title, body, show, onHide, footer }) {
               </Form.Group>
             ))}
 
-          <Modal.Footer>{footer}</Modal.Footer>
+          <Modal.Footer>
+            <Button key="submitBtn" onClick={onSubmit}>
+              Submit
+            </Button>
+            <Button key="cancelBtn" onClick={onCancel}>
+              Cancel
+            </Button>
+          </Modal.Footer>
         </Modal.Body>
       </Modal>
     </div>

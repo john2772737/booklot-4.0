@@ -11,23 +11,19 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  position: String,
-  email: {
+  password: {
     type: String,
     required: true,
     unique: true
   },
+  email: {
+    type: String,
+    required: true,
+    unique: [true,"Email already exists"]
+  },
   birthday: Date,
   phoneNumber: String,
 
-  photo: {
-    data: Buffer, // Store binary data
-    contentType: String // Mime type of the image
-  },
-  idphoto: {
-    data: Buffer, // Store binary data
-    contentType: String // Mime type of the image
-  }
 });
 
 // Create the User model using the schema
