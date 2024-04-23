@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['NOTIFICATION', 'ADMIN', 'SETTINGS'];
 
 export default function DrawerAppBar() {
 
@@ -28,13 +28,13 @@ export default function DrawerAppBar() {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Booklot
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'center' }} > 
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -48,7 +48,7 @@ export default function DrawerAppBar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" position="static">
+      <AppBar component="nav" position="static" sx={{color:'#000', backgroundColor: '#F4F4F4', fontFamily: 'Bodoni Ferrara' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -62,13 +62,13 @@ export default function DrawerAppBar() {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block'} }}
           >
-            MUI
+            Booklot
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button key={item} sx={{ color: '#000', fontFamily:'Bodoni Ferrara', fontSize:'15px'}}>
                 {item}
               </Button>
             ))}

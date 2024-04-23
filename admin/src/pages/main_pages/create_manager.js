@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Toaster, toast } from 'react-hot-toast';
 import Form from '../../components/form'; // Assuming this is a custom form component you've created
 import form from '../../components/form';
+import './create_manager.css';
 
 function CreateManager() {
   const [formData, setFormData] = useState({
@@ -131,6 +132,7 @@ console.log(formData);
   
   return (
     <div>
+      <Container className="container-box"> {/* Container box */}
       <Toaster />
       
       <form onSubmit={handleSubmit}>
@@ -147,6 +149,7 @@ console.log(formData);
         ))}
         <button type="submit">Submit</button>
       </form>
+      </Container>
     </div>
   );
 }
