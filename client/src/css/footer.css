@@ -1,3 +1,8 @@
+#footer{
+  padding: 10px;
+  font-family: 'Bauer Bodoni';
+}
+
 .booklot_logo{
   height: 60px;
   width: 60px;
@@ -10,13 +15,13 @@
 .secret{
   color: white;
 }
+
 .copyright{
-  color: white;
+  color: rgb(168, 168, 168);
 }
-#footer{
-  padding: 10px;
-}
+
 .follow{
   color: white;
 }
+
 
