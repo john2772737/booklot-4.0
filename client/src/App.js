@@ -16,11 +16,13 @@ import Voucher from "./pages/selller/voucher";
 import Home from "./pages/user/home";
 import PageNotFound from "./pages/pagenotfound";
 import SellerLogin from "./pages/sellerLogin"
+import UserRegistration from "./pages/userRegistration";
 function App() {
   return (
     <Routes>
       <Route path="/" element={<UserLogin />} />
       <Route path="/userLogin" element={<UserLogin />} /> {/* Corrected route path */}
+      <Route path="/userRegistration" element={<UserRegistration />} /> {/* Corrected route path */}
       <Route path="/sellerLogin" element={<SellerLogin />} /> {/* Added sellerLogin route */}
       <Route path="*" element={<PageNotFound />} /> {/* Catch-all route for page not found */}
 

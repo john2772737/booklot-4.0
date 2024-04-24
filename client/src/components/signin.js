@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGooglePlusG, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../utils/firebase';
+
+
 function SignInForm() {
   const [state, setState] = React.useState({
     email: "",
@@ -55,6 +57,8 @@ function SignInForm() {
       console.log(error)
     }
   }
+
+
 
   return (
     <div className="form-container sign-in-container">
