@@ -8,14 +8,14 @@ import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 function App() {
  
   return (
-    <div id="app" style={{ height: "100vh", display: "flex" }}>
+    <div id="app" style={{ height: "100vh", display: "flex", color:"#000", backgroundColor:'#000', fontFamily:'Bodoni Ferrara', fontSize:'18px' }}>
       <Sidebar style={{ height: "100vh" }}>
         <Menu>
 
           <MenuItem icon={<HomeOutlinedIcon />}>
-          <Link to="/main">Home</Link></MenuItem>
-          <MenuItem icon={<PeopleOutlinedIcon />}> <Link to="/main/listseller">Seller</Link></MenuItem>
-          <MenuItem icon={<ContactsOutlinedIcon />}> <Link to="/main/manager">Manager</Link></MenuItem>
+          <Link to="/main">Dashboard</Link></MenuItem>
+          <MenuItem icon={<PeopleOutlinedIcon />}> <Link to="/main/listseller">Approval Seller</Link></MenuItem>
+          <MenuItem icon={<ContactsOutlinedIcon />}> <Link to="/main/manager">Admin</Link></MenuItem>
          
         </Menu>
       </Sidebar>

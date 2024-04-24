@@ -5,8 +5,9 @@ import './list_seller.css'; // Import your CSS file
 
 function ListSeller() {
   return (
+    <div className='listseller'>
+    <h1>List Seller</h1>
     <Container className="container-box"> {/* Container box */}
-      <h1>List Seller</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -27,6 +28,7 @@ function ListSeller() {
         </tbody>
       </Table>
     </Container>
+    </div>
   );
 }
 

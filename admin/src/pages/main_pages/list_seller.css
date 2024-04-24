@@ -1,12 +1,26 @@
 /* list_seller.css */
+.listseller {
+  font-family: 'Bodoni Ferrar';
+}
+
 .container-box {
-    width: 80%; /* Adjust as needed */
-    height: 600px;
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
     padding: 20px;
-    background-color: #f3f4e7;
+    background-color: #E8E8E9;
     border: 1px solid #ccc;
     border-radius: 10px; /* Add corner radius */
     margin: 20px auto; /* Center the container */
-    margin-left: 230px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .Table {
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+  }
+
+  h1 {
+    text-align: left;
+    margin-bottom: 20px;
   }
   
