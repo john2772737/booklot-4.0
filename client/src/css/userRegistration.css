@@ -37,3 +37,10 @@
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
   }
+
+/* CSS to turn border to red when in focus */
+.mdb-form .form-outline .form-control:focus {
+  border-color: red !important; /* Change border color to red */
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important; /* Add a red shadow */
+}
+
