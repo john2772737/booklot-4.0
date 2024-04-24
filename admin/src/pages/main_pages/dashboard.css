@@ -1,42 +1,47 @@
 /* dashboard.css */
-.outer-container {
-    background-color: #f3f4e7;
-    height: 600px;
-    width: 80%; /* Adjust as needed */
-    margin-left: 230px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-  }
 
-  .table-container {
-    background-color: #f3f4e7;
-    height: 600px;
-    width: 1045px;
-    display: flex;
-    justify-content: center; /* Center the table horizontally */
-    align-items: center; /* Center the table vertically */
-    border-radius: 20px;
-  }
-  
-  .inner-container {
-    width: 45%; /* Adjust as needed */
-  }
-  
-  .box-container {
-    background-color: #545454;
-    border: 1px solid #fff;
-    padding: 20px;
-    border-radius: 10px; /* Add corner radius */
-    height: 250px;
-    width: 400px;
-  }
-  
-  .overview h1 {
-    margin-left: 230px;
-  }
+/* Style for the outer container */
+.overview {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Bodoni Ferrara';
+}
+
+.outer-container {
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #E8E8E9;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  display: flex;
+  flex-wrap: wrap; /* Allow inner containers to wrap */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the inner containers */
+.inner-container {
+  height: 200px;
+  width: calc(25% - 40px); /* 25% of the outer container width minus margin */
+  background-color: #F4F4F4;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  margin: 20px;
+  padding: 10px;
+}
+
+/* Style for the box content */
+.box-container {
+  padding: 20px;
+}
+
+/* Additional styling for headings */
+h1 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+h2 {
+  text-align: left;
+}

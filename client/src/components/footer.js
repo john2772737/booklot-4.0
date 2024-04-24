@@ -16,7 +16,7 @@ export default function App() {
       className="custom-footer text-center text-lg-start text-muted"
     >
       <section className="secret">
-        <MDBContainer className="text-center text-md-start mt-5">
+        <MDBContainer className="text-center text-md-start mt-5  border-bottom">
           <MDBRow className="mt-3">
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
               <img src={Logo} alt="booklot" className="booklot_logo" />
@@ -112,7 +112,7 @@ export default function App() {
         </MDBContainer>
       </section>
 
-      <section className="d-flex flex-column align-items-center justify-content-center footer-section border-bottom">
+      <section className="d-flex flex-column align-items-center justify-content-center footer-section">
         <div className="follow">
           <h6 className="text-uppercase fw-bold mb-4">Follow Us</h6>
         </div>
@@ -130,16 +130,16 @@ export default function App() {
             <MDBIcon color="white" fab icon="instagram" />
           </a>
         </div>
-      </section>
 
-      <div className="copyright">
-        <div className="text-center footer-copyright">
-          © 2024 Copyright:
-          <a className="text-reset fw-bold" href="#">
-            Booklot
-          </a>
+        <div className="copyright">
+          <div className="text-center footer-copyright">
+            © 2024 Copyright:
+            <a className="text-reset fw-bold" href="#">
+              Booklot
+            </a>
+          </div>
         </div>
-      </div>
+      </section>
     </MDBFooter>
   );
 }
