@@ -20,6 +20,9 @@ import {
 import { auth } from "../utils/firebase";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+
+import axios from 'axios';
+
 function App() {
   const navigate = useNavigate();
   const [Data, setData] = useState({
@@ -28,6 +31,8 @@ function App() {
     email: "",
     photo: "",
   });
+
+
 
   const signInWithFacebook = async () => {
     try {
